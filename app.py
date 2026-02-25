@@ -210,7 +210,20 @@ def app():
            
         elif choice == '4':
             # book analysis
-            pass
+            expensive_book = session.query(Book).order_by(Book.price.desc()).first()
+            newest_book = session.query(Book).order_by(Book.published_date.desc()).first()
+            oldest_book = session.query(Book).order_by(Book.published_date).first()
+            cheap_book = session.query(Book).order_by(Book.price).first()
+            total_books = session.query(Book).count()
+            print(f'''\n
+                  *********BOOK ANALSYS ***********
+                \rNewest Book : {newest_book}
+                \rExpensive Book : {expensive_book}
+                \rCheapest Book: {cheap_book}
+                \rOldest Book: {oldest_book}
+                ''')
+            input('Press enter to return to the main menu')
+                
         else:
             print('GOODBYE')
             app_running = False
